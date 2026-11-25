@@ -101,8 +101,8 @@ We built an end-to-end fraud risk detection system comprising:
 
 ---
 
-### 12. GitHub repository URL placeholder
-`[GITHUB_REPOSITORY_URL_PLACEHOLDER - to be updated upon pushing to public GitHub]`
+### 12. GitHub repository URL
+https://github.com/KrushnaIngale/Kestrel-warranty-fraud-detection
 
 ---
 
