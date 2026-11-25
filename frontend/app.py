@@ -126,14 +126,17 @@ if page == "📊 Overview Dashboard":
         col_a, col_b = st.columns(2)
         with col_a:
             st.subheader("Score Distribution")
-            st.bar_chart(
-                pd.cut(predictions['score'], bins=20).value_counts().sort_index(),
-                use_container_width=True
-            )
+            bins = [0.0, 0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.40, 0.50, 0.60, 1.0]
+            labels = ['0.00-0.05', '0.05-0.10', '0.10-0.15', '0.15-0.20', '0.20-0.25', '0.25-0.30', '0.30-0.40', '0.40-0.50', '0.50-0.60', '0.60-1.00']
+            score_binned = pd.cut(predictions['score'], bins=bins, labels=labels, include_lowest=True).value_counts().sort_index()
+            score_binned.index = score_binned.index.astype(str)
+            st.bar_chart(score_binned, use_container_width=True)
         
         with col_b:
             st.subheader("Risk Band Breakdown")
-            band_counts = predictions['risk_band'].value_counts()
+            band_order = ['Low', 'Medium', 'High']
+            band_counts = predictions['risk_band'].value_counts().reindex(band_order, fill_value=0)
+            band_counts.index = band_counts.index.astype(str)
             st.bar_chart(band_counts, use_container_width=True)
         
         # Model info
